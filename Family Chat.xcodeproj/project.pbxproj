@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A2AE2412CB6E267001D6A9F /* Pods_Family_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FDDE53044D1C0E41504769 /* Pods_Family_Chat.framework */; };
 		AEB15457209E1F1800501247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB15456209E1F1800501247 /* AppDelegate.swift */; };
-		AEB15459209E1F1800501247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB15458209E1F1800501247 /* ViewController.swift */; };
+		AEB15459209E1F1800501247 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB15458209E1F1800501247 /* WelcomeViewController.swift */; };
 		AEB1545C209E1F1800501247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1545A209E1F1800501247 /* Main.storyboard */; };
 		AEB1545E209E1F1A00501247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEB1545D209E1F1A00501247 /* Assets.xcassets */; };
 		AEB15461209E1F1A00501247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB1545F209E1F1A00501247 /* LaunchScreen.storyboard */; };
@@ -20,7 +20,7 @@
 		1EE692C0F3F4C3350D43FDA7 /* Pods-Family Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Family Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Family Chat/Pods-Family Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		AEB15453209E1F1800501247 /* Family Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Family Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB15456209E1F1800501247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AEB15458209E1F1800501247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AEB15458209E1F1800501247 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AEB1545B209E1F1800501247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEB1545D209E1F1A00501247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEB15460209E1F1A00501247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				AEB15456209E1F1800501247 /* AppDelegate.swift */,
-				AEB15458209E1F1800501247 /* ViewController.swift */,
+				AEB15458209E1F1800501247 /* WelcomeViewController.swift */,
 				AEB1545A209E1F1800501247 /* Main.storyboard */,
 				AEB1545D209E1F1A00501247 /* Assets.xcassets */,
 				AEB1545F209E1F1A00501247 /* LaunchScreen.storyboard */,
@@ -202,7 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEB15459209E1F1800501247 /* ViewController.swift in Sources */,
+				AEB15459209E1F1800501247 /* WelcomeViewController.swift in Sources */,
 				AEB15457209E1F1800501247 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,7 +351,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W747UVW3WJ;
 				INFOPLIST_FILE = "Family Chat/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jerryding.Family-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -367,7 +370,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W747UVW3WJ;
 				INFOPLIST_FILE = "Family Chat/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jerryding.Family-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
