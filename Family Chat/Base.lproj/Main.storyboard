@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -92,7 +91,7 @@
         <!--Register-->
         <scene sceneID="kzJ-FU-eXi">
             <objects>
-                <viewController title="Register" id="Qdw-Ge-8DD" sceneMemberID="viewController">
+                <viewController title="Register" id="Qdw-Ge-8DD" customClass="RegisterViewController" customModule="Family_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WGN-Im-bQV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,7 +105,7 @@
                                     <constraint firstAttribute="height" constant="30" id="7Lq-iH-XRG"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k1v-2p-50W">
@@ -116,7 +115,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8e6-Ac-lx8">
                                 <rect key="frame" x="16" y="210" width="382" height="30"/>
@@ -126,7 +125,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BY-8A-3IK">
                                 <rect key="frame" x="16" y="248" width="382" height="30"/>
@@ -137,6 +136,9 @@
                                 <state key="normal" title="Register">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerPressed:" destination="Qdw-Ge-8DD" eventType="touchUpInside" id="KDT-8j-OOw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -160,15 +162,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3W3-sT-hke"/>
                     </view>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="8e6-Ac-lx8" id="Fst-0Q-rYg"/>
+                        <outlet property="emailTextField" destination="1nC-Xc-fvI" id="jXP-3Z-eyY"/>
+                        <outlet property="passwordTextField" destination="k1v-2p-50W" id="UpE-4H-oTu"/>
+                        <segue destination="IG6-Fl-klb" kind="show" identifier="goToChat" id="wNs-35-7bf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeO-tB-WqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10.144927536231885" y="484.23913043478262"/>
+            <point key="canvasLocation" x="-12" y="512"/>
         </scene>
         <!--Login-->
         <scene sceneID="EUY-MH-ksh">
             <objects>
-                <viewController title="Login" id="VfL-PR-UjP" sceneMemberID="viewController">
+                <viewController title="Login" id="VfL-PR-UjP" customClass="LoginViewController" customModule="Family_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Icv-QI-5eL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,7 +190,7 @@
                                     <constraint firstAttribute="height" constant="30" id="gpG-Eh-mkx"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCj-gU-zba">
@@ -192,7 +200,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZW-8c-Da5">
                                 <rect key="frame" x="16" y="210" width="382" height="30"/>
@@ -203,6 +211,9 @@
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginPressed:" destination="VfL-PR-UjP" eventType="touchUpInside" id="5sr-kA-SXa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -223,10 +234,43 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ndh-R8-qas"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="u2e-r2-8eB" id="VZL-fh-TVc"/>
+                        <outlet property="passwordTextField" destination="dCj-gU-zba" id="7xL-XJ-2cx"/>
+                        <segue destination="IG6-Fl-klb" kind="show" identifier="goToChat" id="iPo-Uq-G4a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQB-0L-8qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-11.594202898550726" y="-197.28260869565219"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="8TC-Ds-ntx">
+            <objects>
+                <tableViewController title="Chat" id="IG6-Fl-klb" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SYB-aS-u6n">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TrQ-TI-BSd">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TrQ-TI-BSd" id="sqA-Pw-Zk9">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IG6-Fl-klb" id="Xg8-2P-Gq8"/>
+                            <outlet property="delegate" destination="IG6-Fl-klb" id="i1H-lA-g31"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lca-R8-08u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="914" y="134"/>
         </scene>
     </scenes>
     <resources>
@@ -234,4 +278,7 @@
         <image name="registerBackground" width="223" height="397"/>
         <image name="welcomeBackground" width="414" height="736"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="iPo-Uq-G4a"/>
+    </inferredMetricsTieBreakers>
 </document>
