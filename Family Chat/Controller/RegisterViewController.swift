@@ -12,6 +12,7 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
+    @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -58,9 +59,15 @@ class RegisterViewController: UIViewController {
                     
                 }
                 else {
+                    
+                    let usersDB = Database.database().reference().child("Nicknames")
+                    
+                    usersDB.child(user!.uid).setValue(self.nicknameTextField.text)
+                    
                     print("Registration Successful")
                     SVProgressHUD.showSuccess(withStatus: "Registration Successful")
                     self.performSegue(withIdentifier: "goToChat", sender: self)
+                    
                 }
                 
             }
