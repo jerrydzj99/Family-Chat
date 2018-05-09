@@ -18,6 +18,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var borderConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -75,13 +76,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             heightConstraint.constant = keyboardSize.height + 50
+            borderConstraint.constant = heightConstraint.constant
             view.layoutIfNeeded()
+            if messageArray.count != 0 {
+                messageTableView.scrollToRow(at: IndexPath(item: messageArray.count - 1, section: 0), at: .bottom, animated: false)
+            }
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
         heightConstraint.constant = 50
+        borderConstraint.constant = heightConstraint.constant
         view.layoutIfNeeded()
+        if messageArray.count != 0 {
+            messageTableView.scrollToRow(at: IndexPath(item: messageArray.count - 1, section: 0), at: .bottom, animated: false)
+        }
     }
     
     @objc func tableViewTapped() {
@@ -112,7 +121,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.messageArray.append(message)
                 self.configureTableView()
                 self.messageTableView.reloadData()
-                self.messageTableView.scrollToRow(at: IndexPath(item: self.messageArray.count - 1, section: 0), at: .bottom, animated: true)
+                self.messageTableView.scrollToRow(at: IndexPath(item: self.messageArray.count - 1, section: 0), at: .bottom, animated: false)
                 
             })
             
@@ -122,9 +131,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
-        messageTextField.endEditing(true)
+        if messageTextField.text == "" {
+            return
+        }
         
-        messageTextField.isEnabled = false
         sendButton.isEnabled = false
         
         let messagesDB = Database.database().reference().child("Messages")
@@ -141,7 +151,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             else {
                 print("Message Saved")
-                self.messageTextField.isEnabled = true
                 self.sendButton.isEnabled = true
                 self.messageTextField.text = ""
             }

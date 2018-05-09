@@ -241,11 +241,12 @@
                             <constraint firstItem="qrl-eE-xja" firstAttribute="trailing" secondItem="BqN-0c-obI" secondAttribute="trailing" id="npf-m5-l5J"/>
                             <constraint firstItem="ACL-Nh-QOu" firstAttribute="bottom" secondItem="Wss-iC-r8i" secondAttribute="bottom" id="s3K-dY-09I"/>
                             <constraint firstItem="ACL-Nh-QOu" firstAttribute="trailing" secondItem="Wss-iC-r8i" secondAttribute="trailing" id="vkn-tw-cY7"/>
-                            <constraint firstItem="ACL-Nh-QOu" firstAttribute="top" secondItem="qrl-eE-xja" secondAttribute="bottom" id="w6B-Ys-GUM"/>
+                            <constraint firstItem="BqN-0c-obI" firstAttribute="bottom" secondItem="qrl-eE-xja" secondAttribute="bottom" constant="50" id="ziX-XE-yDp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BqN-0c-obI"/>
                     </view>
                     <connections>
+                        <outlet property="borderConstraint" destination="ziX-XE-yDp" id="wkX-MJ-Q4h"/>
                         <outlet property="heightConstraint" destination="Sj1-gz-48p" id="OaX-bY-rDx"/>
                         <outlet property="messageTableView" destination="qrl-eE-xja" id="WZG-Wz-6ra"/>
                         <outlet property="messageTextField" destination="6GW-5h-5jf" id="Txu-bC-ORV"/>
