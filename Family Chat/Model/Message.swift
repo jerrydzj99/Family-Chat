@@ -13,5 +13,6 @@ class Message {
     var senderID = ""
     var senderNickname = ""
     var messageBody = ""
+    var senderProfilePicture = 0
     
 }

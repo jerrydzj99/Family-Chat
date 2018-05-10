@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import ChameleonFramework
+import SVProgressHUD
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -23,6 +24,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.navigationItem.hidesBackButton = true
         
         messageTableView.delegate = self
         messageTableView.dataSource = self
@@ -56,16 +59,31 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         
-        cell.avatarImageView.image = UIImage(named: "egg")
+        var avatarImageName = ""
+        
+        switch messageArray[indexPath.row].senderProfilePicture {
+        case 1:
+            avatarImageName = "chicken"
+        case 2:
+            avatarImageName = "turtle"
+        case 3:
+            avatarImageName = "tiger"
+        case 4:
+            avatarImageName = "bird"
+        case 5:
+            avatarImageName = "fish"
+        default:
+            avatarImageName = "egg"
+        }
+        
+        cell.avatarImageView.image = UIImage(named: avatarImageName)
         cell.senderNicknameLabel.text = messageArray[indexPath.row].senderNickname
         cell.messageBodyLabel.text = messageArray[indexPath.row].messageBody
         
         if messageArray[indexPath.row].senderID == Auth.auth().currentUser?.uid as String? {
-            cell.avatarImageView.backgroundColor = UIColor.flatMint()
             cell.messageBackground.backgroundColor = UIColor.flatSkyBlue()
         }
         else {
-            cell.avatarImageView.backgroundColor = UIColor.flatWatermelon()
             cell.messageBackground.backgroundColor = UIColor.flatGray()
         }
         
@@ -108,15 +126,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         DB.child("Messages").observe(.childAdded) { (messageSnapshot) in
             
-            let messageSnapshotValue = messageSnapshot.value as! Dictionary<String,String>
-            let message = Message()
-            message.senderID = messageSnapshotValue["SenderID"]!
-            message.messageBody = messageSnapshotValue["MessageBody"]!
-            
-            DB.child("Nicknames").observeSingleEvent(of: .value, with: { (userSnapshot) in
+            DB.child("Users").observeSingleEvent(of: .value, with: { (userSnapshot) in
                 
-                let userSnapshotValue = userSnapshot.value as! Dictionary<String,String>
-                message.senderNickname = userSnapshotValue[message.senderID]!
+                let messageSnapshotValue = messageSnapshot.value as! Dictionary<String,String>
+                let userSnapshotValue = userSnapshot.value as! Dictionary<String,Dictionary<String,String>>
+                
+                let message = Message()
+                
+                message.senderID = messageSnapshotValue["SenderID"]!
+                message.messageBody = messageSnapshotValue["MessageBody"]!
+                message.senderNickname = userSnapshotValue[message.senderID]!["Nickname"]!
+                message.senderProfilePicture = Int(userSnapshotValue[message.senderID]!["ProfilePicture"]!)!
                 
                 self.messageArray.append(message)
                 self.configureTableView()
@@ -128,6 +148,34 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
+    
+//    func retrieveMessages() {
+//
+//        let DB = Database.database().reference()
+//
+//        DB.child("Messages").observe(.childAdded) { (messageSnapshot) in
+//
+//            let messageSnapshotValue = messageSnapshot.value as! Dictionary<String,String>
+//            let message = Message()
+//            message.senderID = messageSnapshotValue["SenderID"]!
+//            message.messageBody = messageSnapshotValue["MessageBody"]!
+//
+//            DB.child("Users").child(message.senderID).observeSingleEvent(of: .value, with: { (userSnapshot) in
+//
+//                let userSnapshotValue = userSnapshot.value as! Dictionary<String,String>
+//                message.senderNickname = userSnapshotValue["Nickname"]!
+//                message.senderProfilePicture = Int(userSnapshotValue["ProfilePicture"]!)!
+//                self.messageArray.append(message)
+//                print("message appended! messageBody: \(message.messageBody); senderNickname: \(message.senderNickname)")
+//                self.configureTableView()
+//                self.messageTableView.reloadData()
+//                self.messageTableView.scrollToRow(at: IndexPath(item: self.messageArray.count - 1, section: 0), at: .bottom, animated: false)
+//
+//            })
+//
+//        }
+//
+//    }
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
@@ -154,6 +202,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.sendButton.isEnabled = true
                 self.messageTextField.text = ""
             }
+        }
+        
+    }
+    
+    @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
+        
+        do {
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+        }
+        catch {
+            SVProgressHUD.showError(withStatus: "There's a problem signing out.")
         }
         
     }
